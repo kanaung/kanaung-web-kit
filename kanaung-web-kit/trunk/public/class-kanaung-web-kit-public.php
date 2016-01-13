@@ -21,6 +21,14 @@
  * @author     Sithu Thwin <sithu@thwin.net>
  */
 class Kanaung_Web_Kit_Public {
+        /**
+	 * The converter that's responsible for encoding convertor
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      Converter    $converter Convert encoding
+	 */
+	protected $converter;
 
 	/**
 	 * The ID of this plugin.
@@ -99,5 +107,21 @@ class Kanaung_Web_Kit_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/kanaung-web-kit-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+        
+        private function callback($buffer) {
+          // modify buffer here, and then return the updated code
+            $converter = new Converter();
+            $options = ['input_font' => 'Myanmar3', 'output' => 'Zawgyi-One'];
+          $buffer = $converter->convert($buffer,$options);
+          return $buffer;
+        }
+
+        public function buffer_start() {
+          ob_start(array( $this, 'callback'));
+        }
+
+        public function buffer_end() {
+          ob_end_flush();
+        }
 
 }

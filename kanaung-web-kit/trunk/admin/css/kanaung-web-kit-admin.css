@@ -2,3 +2,45 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+/* my_MM: Add Myanmar Script supported fonts for various OS platforms. */
+:lang(my-mm) .media-modal,
+:lang(my-mm) .media-frame,
+:lang(my-mm) .media-frame .search,
+:lang(my-mm) .media-frame input[type="text"],
+:lang(my-mm) .media-frame input[type="password"],
+:lang(my-mm) .media-frame input[type="number"],
+:lang(my-mm) .media-frame input[type="search"],
+:lang(my-mm) .media-frame input[type="email"],
+:lang(my-mm) .media-frame input[type="url"],
+:lang(my-mm) .media-frame textarea,
+:lang(my-mm) .media-frame select {
+	font-family: "Zawgyi-One", "Noto Sans", "Noto Sans Myanmar", "Myanmar Text", "Myanmar MN", Padauk, Tharlon, Tahoma, Arial, sans-serif;
+}
+
+html:lang(my-mm) .wp-switch-editor,
+html:lang(my-mm) .quicktags-toolbar input,
+html:lang(my-mm) #wpadminbar *  {
+ 	//font-family: "Zawgyi-One", "Noto Sans", "Noto Sans Myanmar", "Myanmar Text", "Myanmar MN", Padauk, Tharlon, Tahoma, Arial, sans-serif;
+}
+
+
+.locale-my-mm .wp-editor-area {
+	//font-family: "Zawgyi-One", "Noto Sans", "Noto Sans Myanmar", "Myanmar Text", "Myanmar MN", Padauk, Tharlon, Tahoma, Arial, sans-serif;
+}
+
+body.locale-my-mm,
+body.locale-my-mm .press-this a.wp-switch-editor {
+	font-family: "Zawgyi-One", "Noto Sans", "Noto Sans Myanmar", "Myanmar Text", "Myanmar MN", Padauk, Tharlon, Tahoma, Arial, sans-serif;
+}
+
+body.locale-my-mm ol, #tinymce {
+	list-style-type: myanmar;
+}
+
+:not(.mce-container) {
+    font-family: "Zawgyi-One";
+}

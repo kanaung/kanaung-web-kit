@@ -75,6 +75,7 @@ class Kanaung_Web_Kit {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+                $this->define_global_hooks();
 
 	}
 
@@ -95,6 +96,11 @@ class Kanaung_Web_Kit {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+
+		/**
+		 * The class responsible for converting encoding.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-converter.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -118,8 +124,13 @@ class Kanaung_Web_Kit {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-kanaung-web-kit-public.php';
+                
+                /**
+		 * The class responsible for defining all actions that occur globally
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'global/class-kanaung-web-kit-global.php';
 
-		$this->loader = new Kanaung_Web_Kit_Loader();
+		$this->loader = new Kanaung_Web_Kit_Loader(); 
 
 	}
 
@@ -153,6 +164,8 @@ class Kanaung_Web_Kit {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+                $this->loader->add_action('admin_head', $plugin_admin,'buffer_start');
+                $this->loader->add_action('admin_footer', $plugin_admin, 'buffer_end');
 
 	}
 
@@ -169,8 +182,26 @@ class Kanaung_Web_Kit {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+                $this->loader->add_action('wp_head', $plugin_public,'buffer_start');
+                $this->loader->add_action('wp_footer', $plugin_public, 'buffer_end');
 
 	}
+
+        
+        /**
+	 * Register all of the hooks related to the global functionality.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+        private function define_global_hooks() {
+            
+                $plugin_global = new Kanaung_Web_Kit_Global( $this->get_plugin_name(), $this->get_version() );
+
+                $this->loader->add_action( 'wp_enqueue_scripts', $plugin_global, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_global, 'enqueue_scripts' );
+        }
+        
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.

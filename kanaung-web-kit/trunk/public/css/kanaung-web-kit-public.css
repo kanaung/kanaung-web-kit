@@ -2,3 +2,9 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+/* my_MM: Add Myanmar Script supported fonts for various OS platforms. */
+
+
+html:lang(my-mm) * {
+    font-family: "Zawgyi-One";
+}
