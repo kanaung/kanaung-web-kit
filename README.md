@@ -1,5 +1,5 @@
 === Kanaung Web Kit===
-Contributors: *Sithu Thwin,*Zox Zin Min,*Min Kyaw
+Contributors: *herzcthu,*Zox Zin Min,*Min Kyaw,*thetwinhtwe
 Donate link: http://www.thwin.net
 Tags: ayar, burmese, converter, Encoding, fonts, Myanmar, myanmar3, my_MM, zawgyi
 Author URI:[Myanmar Wordpress](http://www.facebook.com/groups/webmazer/ “Myanmar Wordpress Facebook Group”)
